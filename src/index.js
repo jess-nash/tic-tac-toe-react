@@ -4,42 +4,66 @@ import './index.css';
 
 
 // Square component renders a single <button>
-class Square extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      value: null,
-    };
-  }
-  // In JavaScript classes, you need to always call super when defining the constructor of a subclass.
-  // All React component classes that have a constructor should start with a super(props) call.
-
-  render() {
-    return (
-      <button
-        className='square'
-        onClick={() => this.setState({value: 'X'})}
-        /* By calling this.setState from an onClick handler in the Square’s render method,
-        we tell React to re-render that Square whenever its <button> is clicked. */
-        // seperated to different lines for readability
-        /* When you call setState in a component,
-        React automatically updates the child components inside of it too. */
-      >
-        {this.state.value}
-      </button>
-    );
-  }
+function Square(props) {
+  return (
+    <button className='square' onClick={props.onClick}>
+      {props.value}
+    </button>
+  );
 }
+
+// replaced the Square class with the function above
+// class Square extends React.Component {
+//   // Deleted the constructor from Square because Square no longer keeps track of the game’s state
+
+//   render() {
+//     return (
+//       <button
+//         className='square'
+//         onClick={() => this.props.onClick()}
+//         // When a Square is clicked, the onClick function provided by the Board is called.
+//       >
+//         {this.props.value}
+//       </button>
+//     );
+//   }
+// }
 
 // Board component renders 9 squares
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+      xIsNext: true, // set the first move to be “X” by default.
+    };
+  }
+
+  handleClick(i) {
+    const squares = this.state.squares.slice(); // Note how in handleClick, we call .slice() to create a copy of the squares array to modify instead of modifying the existing array.
+    squares[i] = this.state.xIsNext ? 'X' : 'O';
+    this.setState({
+      squares: squares,
+      xIsNext: !this.state.xIsNext,
+    });
+  }
+
   renderSquare(i) {
-    //passes a prop (property) called value to the Square
-    return <Square value={i} />;
+    // passes a prop (property) called value to the Square
+    return (
+      <Square
+        value={this.state.squares[i]}
+        onClick={() => this.handleClick(i)}
+        /* Now we’re passing down two props from Board to Square: value and onClick.
+          The onClick prop is a function that Square can call when clicked. */
+      />
+    );
+    /* We split the returned element into multiple lines for readability,
+    and added parentheses so that JavaScript doesn’t insert a semicolon after return and break our code. */
   }
 
   render() {
-    const status = 'Next player: X';
+    const status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
 
     return (
       <div>
