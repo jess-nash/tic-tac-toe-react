@@ -5,15 +5,27 @@ import './index.css';
 
 // Square component renders a single <button>
 class Square extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+  // In JavaScript classes, you need to always call super when defining the constructor of a subclass.
+  // All React component classes that have a constructor should start with a super(props) call.
+
   render() {
     return (
-      <button className='square' onClick={() => console.log('click')}>
-        {/* Notice how with onClick={() => console.log('click')},
-        we’re passing a function as the onClick prop.
-        React will only call this function after a click.
-        Forgetting () => and writing onClick={console.log('click')} is a common mistake,
-        and would fire every time the component re-renders. */}
-        {this.props.value}
+      <button
+        className='square'
+        onClick={() => this.setState({value: 'X'})}
+        /* By calling this.setState from an onClick handler in the Square’s render method,
+        we tell React to re-render that Square whenever its <button> is clicked. */
+        // seperated to different lines for readability
+        /* When you call setState in a component,
+        React automatically updates the child components inside of it too. */
+      >
+        {this.state.value}
       </button>
     );
   }
