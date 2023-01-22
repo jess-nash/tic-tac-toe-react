@@ -2,19 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
+
+// Square component renders a single <button>
 class Square extends React.Component {
   render() {
     return (
-      <button className='square'>
-        {/* {TODO} */}
+      <button className='square' onClick={() => console.log('click')}>
+        {/* Notice how with onClick={() => console.log('click')},
+        we’re passing a function as the onClick prop.
+        React will only call this function after a click.
+        Forgetting () => and writing onClick={console.log('click')} is a common mistake,
+        and would fire every time the component re-renders. */}
+        {this.props.value}
       </button>
     );
   }
 }
 
+// Board component renders 9 squares
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square />;
+    //passes a prop (property) called value to the Square
+    return <Square value={i} />;
   }
 
   render() {
@@ -43,6 +52,7 @@ class Board extends React.Component {
   }
 }
 
+// Game component renders a baord with placeholder values
 class Game extends React.Component {
   render () {
     return (
