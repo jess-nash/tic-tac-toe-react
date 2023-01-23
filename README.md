@@ -7,15 +7,14 @@ Features:
 - allows players to review a game's history and see previous versions of a game's board
 
 
-### This game was build while following React's tutorial https://reactjs.org/tutorial/tutorial.html#picking-a-key
+This game was build while following [React's intro to react tutorial](https://reactjs.org/tutorial/tutorial.html) & bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
+## To play the tic-tac-toe game:
 
 In the project directory, you can run:
 
 ### `npm start`
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
