@@ -1,4 +1,5 @@
 # Tic-Tac-Toe Game using React
+<img src="https://user-images.githubusercontent.com/97200803/214000608-3e61e450-a5af-480d-b2ae-e5d9b883a7a4.gif" height="200"/>
 
 Features:
 - let's you play tic-tac-toe
